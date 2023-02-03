@@ -33,7 +33,7 @@ Example:
 ./oss [-h] [-n] [-s t] [-l f]
 ```
 
-*	-h	describes how the project should run and then, terminate
+*	-h	describes how the project should run and then, terminates
 *	-n	the number of worker processes
 *	-s	the number of processes that can be running simultaneously and 
 *	-t	the number of iterations the workers do
