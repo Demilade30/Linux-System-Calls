@@ -33,10 +33,10 @@ Example:
 ./oss [-h] [-n] [-s t] [-l f]
 ```
 
-*-h	describes how the project should run and then, terminate
-*-n	the number of worker processes
-*-s	the number of processes that can be running simultaneously and 
-*-t	the number of iterations the workers do
+*	-h	describes how the project should run and then, terminate
+*	-n	the number of worker processes
+*	-s	the number of processes that can be running simultaneously and 
+*	-t	the number of iterations the workers do
 
 ## Note
 Make sure to use the correct syntax when running the executables and makefile.
