@@ -11,7 +11,7 @@ This project is aimed at compiling two source files into two separate executable
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ## Makefile
-A makefile has been created to compile and create the executables. The makefile uses the `all` command to compile multiple executables from the same makefile.
+A makefile has been created to compile and create the executables. Type `make` to tun the project. The makefile uses the `all` command to compile multiple executables from the same makefile.
 
 ## Executables
 ### OSS
