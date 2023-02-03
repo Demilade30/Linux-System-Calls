@@ -25,12 +25,17 @@ When the `worker` is executing, it outputs its PID, its parent's PID, and the it
 ## Usage
 To compile the source files into executables, simply run the makefile with the command `make`. This will compile both the `oss` and `worker` executables. To launch the `worker` executable with a specific number of iterations, call the `oss` executable with the desired number as a command line argument.
 
+## How to run the program
+	`make`
+
 Example:
 ```bash
-./oss 5
+./oss [-h] [-n] [-s t] [-l f]
 ```
-
-This will launch the worker executable with 5 iterations.
+    -h 	describes how the project should run and then, terminate
+    -n  the number of worker processes
+		-s 	the number of processes that can be running simultaneously and 
+		-t 	the number of iterations the workers do
 
 ## Note
 Make sure to use the correct syntax when running the executables and makefile.
