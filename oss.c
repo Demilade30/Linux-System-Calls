@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
+#include <errno.h>
+#include <sys/types.h>
 #include <sys/wait.h>
 #include <stdbool.h>
 
@@ -19,14 +22,14 @@ void helpMenu(){
 }
 
 int main(int argc, char** argv) {
-	int proc = 0;
+	int proc = 0; // the number of total children to launch
 	int opt = 0;
 	int i = 0;
 	int j = 0;
-	int running = 0;
+	int running = 0; // the number of child processes currently running
 	int status;
-	int simul = 0;
-	int iter = 0;
+	int simul = 0; // the number to allow to run simultaneously
+	int iter = 0; // the number to pass to the worker process
 	pid_t pid;
 	char buffer [BUFSIZE];
 	char* prog_name = argv[0];	
@@ -58,21 +61,33 @@ int main(int argc, char** argv) {
 		if (running < simul) {
 			pid = fork();
 			if (pid == 0) {
+				// child process
 				snprintf(buffer, BUFSIZE, "%d", iter);
 				execl("./worker", "worker", buffer, (char *)NULL);
 				exit(0);
-			} else {
+			} else if(pid > 0) {
+				// parent process
 				running++;
-			}	
+			} else {
+                // error in fork()
+                printf("Error in fork(): %s\n", strerror(errno));
+                return 1;
+               	 }	
 		} else {
+			// parent waits for child process to exit
+			pid_t child_pid = waitpid(-1, &status, WNOHANG);
+			if (child_pid > 0) {
 			wait (&status);
-			running--;
+			running--;}
 		}
 	}
 	while (j < running) {
 		wait(&status);
 		j++;
 	}
+	
+	// wait for all child processes to exit
+	while (wait(NULL) > 0);
 
 	return 0;
 }
