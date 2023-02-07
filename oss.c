@@ -51,10 +51,6 @@ int main(int argc, char** argv) {
 		}
 	}
 	
-	if (help) {
-		helpMenu();
-}
-
 	for (i = 0; i < proc; i++){
 		if (running < simul) {
 			pid = fork();
