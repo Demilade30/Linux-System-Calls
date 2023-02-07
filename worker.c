@@ -1,3 +1,6 @@
+// Author: Divine Akinjiyan
+// Date: 02/07/2023
+
 #include <unistd.h>
 #include <stdio.h>
 
