@@ -1,3 +1,6 @@
+// Author: Divine Akinjiyan
+// Date: 02/07/2023
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -8,7 +11,7 @@
 
 void helpMenu(){
 	printf("Usage: ./oss [-h] [-n proc] [-s simul] [-t iter]\n");
-        printf("-h describes how the project should run and then, terminates.\n ");
+        printf("-h describes how the project should run and then, terminates.\n");
         printf("-n proc: the number of total children worker processes to launch.\n");
         printf("-s simul: the number of children processes that can be running simultaneously and.\n");
 	printf("-t iter: the number of iterations to pass to the worker process that the workers do.\n");
@@ -16,14 +19,14 @@ void helpMenu(){
 }
 
 int main(int argc, char** argv) {
-	int proc = 0;
+	int proc = 0; // the number of total children to launch
 	int opt = 0;
 	int i = 0;
 	int j = 0;
-	int running = 0;
+	int running = 0; // the number of child processes currently running
 	int status;
-	int simul = 0;
-	int iter = 0;
+	int simul = 0; // the number to allow to run simultaneously
+	int iter = 0; // the number to paass to the worker process
 	pid_t pid;
 	char buffer [BUFSIZE];
 	char* prog_name = argv[0];	
@@ -55,10 +58,15 @@ int main(int argc, char** argv) {
 		if (running < simul) {
 			pid = fork();
 			if (pid == 0) {
+				// child process
 				snprintf(buffer, BUFSIZE, "%d", iter);
 				execl("./worker", "worker", buffer, (char *)NULL);
 				exit(0);
 			} else {
+				pid_t child_ID = waitpid(-1, &status, WNOHANG);
+				if (child_ID > 0) {
+					running--;
+}
 				running++;
 			}	
 		} else {
