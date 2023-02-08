@@ -6,6 +6,7 @@ This project is aimed at compiling two source files into two separate executable
 
 ## Author
 * Name: Divine Akinjiyan (completed on: 02/07/2023)
+* Version Control: GitHub
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
